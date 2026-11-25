@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SHAFIUL ALAM | Personal Blog</title>
+<style>
+:root{--ink:#26332e;--muted:#718078;--paper:#faf9f5;--green:#315b49;--gold:#bd9860}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Georgia,"Noto Serif Bengali",serif}
+header{background:#fff;border-bottom:1px solid #e8e5dc;padding:22px 7%;display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
+.brand{font-size:25px;letter-spacing:2px;font-weight:bold;color:var(--green)}
+nav a{color:var(--ink);text-decoration:none;margin:0 10px;font-size:14px}
+.hero{padding:65px 8%;background:#e9eee8;display:flex;align-items:center;gap:45px;flex-wrap:wrap}
+.photo{width:155px;height:155px;border-radius:50%;border:2px dashed #8b9d90;display:grid;place-items:center;color:#64766b;text-align:center;background:#f7f8f4}
+.hero h1{font-size:38px;margin:0 0 12px}
+.hero p{color:#53665b;line-height:1.8;max-width:600px}
+main{max-width:1100px;margin:45px auto;padding:0 22px}
+.section-title{font-size:26px;border-bottom:1px solid #ddd7ca;padding-bottom:13px}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}
+input,select,textarea{padding:12px;border:1px solid #d8d8d0;border-radius:5px;background:white;font:inherit}
+#search{flex:1;min-width:180px}
+button{padding:11px 17px;background:var(--green);color:white;border:0;border-radius:5px;cursor:pointer;font:inherit}
+button:hover{opacity:.88}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px}
+.post{background:white;padding:23px;border:1px solid #e9e5dc;border-radius:7px}
+.post small{color:var(--gold)}
+.post h3{font-size:21px;margin:12px 0}
+.post p{line-height:1.8;color:#647168}
+.post button{margin-top:8px}
+#article{display:none;background:white;padding:30px;border-radius:8px;line-height:2;margin-top:25px}
+#admin{display:none;background:#f0f2ed;padding:25px;border-radius:8px;margin-top:30px}
+#admin input,#admin textarea,#admin select{display:block;width:100%;margin:10px 0}
+footer{margin-top:70px;background:#263c32;color:#eee;padding:35px 8%;text-align:center;line-height:2}
+footer a{color:#e9d5ae}
+@media(max-width:600px){.hero h1{font-size:29px}header{padding:18px 5%}nav a{margin:0 5px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">SHAFIUL ALAM</div>
+  <nav>
+    <a href="#">হোম</a>
+    <a href="#posts">লেখালেখি</a>
+    <a href="#about">পরিচিতি</a>
+    <a href="#contact">যোগাযোগ</a>
+  </nav>
+</header>
+
+<section class="hero" id="about">
+  <div class="photo">এখানে<br>তোমার ছবি</div>
+  <div>
+    <h1>শফিউল আলম</h1>
+    <p>শব্দের ভেতর খুঁজি জীবনের গল্প। অনুভূতি, সাহিত্য, ব্যক্তিগত অভিজ্ঞতা ও সময়ের কথা নিয়ে এই ছোট্ট আয়োজন।</p>
+    <p><i>Welcome to my personal literary space.</i></p>
+  </div>
+</section>
+
+<main>
+  <h2 class="section-title" id="posts">সাম্প্রতিক লেখাসমূহ</h2>
+  <div class="tools">
+    <input id="search" placeholder="লেখা খুঁজুন..." oninput="showPosts()">
+    <select id="category" onchange="showPosts()">
+      <option value="">সব ক্যাটাগরি</option>
+      <option>কবিতা ও সাহিত্য</option>
+      <option>জীবন ও অনুভূতি</option>
+      <option>ব্যক্তিগত গল্প</option>
+      <option>সমাজ ও সমসাময়িক</option>
+      <option>ইতিহাস ও তথ্য</option>
+    </select>
+  </div>
+  <div class="grid" id="postList"></div>
+  <div id="article">
+    <button onclick="closeArticle()">← ফিরে যান</button>
+    <h2 id="articleTitle"></h2>
+    <small id="articleInfo"></small>
+    <p id="articleBody"></p>
+  </div>
+
+  <div style="margin-top:45px">
+    <button onclick="toggleAdmin()">Admin Panel খুলুন</button>
+  </div>
+  <section id="admin">
+    <h2>নতুন লেখা প্রকাশ</h2>
+    <input id="title" placeholder="লেখার শিরোনাম">
+    <select id="newCategory">
+      <option>কবিতা ও সাহিত্য</option>
+      <option>জীবন ও অনুভূতি</option>
+      <option>ব্যক্তিগত গল্প</option>
+      <option>সমাজ ও সমসাময়িক</option>
+      <option>ইতিহাস ও তথ্য</option>
+    </select>
+    <textarea id="body" rows="8" placeholder="তোমার সম্পূর্ণ লেখা এখানে লিখো"></textarea>
+    <button onclick="addPost()">লেখা প্রকাশ করো</button>
+    <p id="message"></p>
+    <small>এটি শুধু ব্রাউজারে সংরক্ষিত ডেমো Admin Panel।</small>
+  </section>
+</main>
+
+<footer id="contact">
+  <strong>SHAFIUL ALAM</strong><br>
+  Words, thoughts and stories.<br>
+  যোগাযোগ: তোমার ইমেইল পরে এখানে বসাবে।<br>
+  <a href="#">Privacy Policy</a> · <a href="#">About</a>
+  <p>© 2026 Shafiul Alam. All rights reserved.</p>
+</footer>
+
+<script>
+let posts = JSON.parse(localStorage.getItem("shafiulPosts") || "null") || [
+ {title:"নিঃসঙ্গতার নিজস্ব ভাষা",category:"জীবন ও অনুভূতি",body:"কখনো কখনো মানুষের ভিড়েও নিজের সঙ্গে একা হয়ে যেতে হয়। কিছু অনুভূতি থাকে, যাদের কোনো ভাষা নেই; শুধু নীরবে বয়ে বেড়াতে হয়।",date:"নমুনা লেখা"},
+ {title:"শব্দের কাছে ফিরে আসা",category:"কবিতা ও সাহিত্য",body:"প্রতিটি শব্দের ভেতর লুকিয়ে থাকে একটি গল্প। কিছু গল্প বলা হয়, কিছু গল্প থেকে যায় মনের গভীরে।",date:"নমুনা লেখা"}
+];
+function save(){localStorage.setItem("shafiulPosts",JSON.stringify(posts))}
+function showPosts(){
+ const q=document.getElementById("search").value.toLowerCase();
+ const c=document.getElementById("category").value;
+ const list=document.getElementById("postList");
+ list.innerHTML="";
+ posts.forEach((p,i)=>{
+  if((!c||p.category===c)&&(p.title.toLowerCase().includes(q)||p.body.toLowerCase().includes(q))){
+   const card=document.createElement("article");
+   card.className="post";
+   const small=document.createElement("small");small.textContent=p.category+" · "+p.date;
+   const h=document.createElement("h3");h.textContent=p.title;
+   const para=document.createElement("p");para.textContent=p.body.slice(0,115)+"...";
+   const btn=document.createElement("button");btn.textContent="সম্পূর্ণ লেখা পড়ুন";btn.onclick=()=>openArticle(i);
+   card.append(small,h,para,btn);list.append(card);
+  }
+ });
+}
+function openArticle(i){
+ const p=posts[i];
+ document.getElementById("articleTitle").textContent=p.title;
+ document.getElementById("articleInfo").textContent=p.category+" · "+p.date;
+ document.getElementById("articleBody").textContent=p.body;
+ document.getElementById("article").style.display="block";
+ document.getElementById("article").scrollIntoView({behavior:"smooth"});
+}
+function closeArticle(){document.getElementById("article").style.display="none"}
+function toggleAdmin(){
+ const a=document.getElementById("admin");
+ a.style.display=a.style.display==="block"?"none":"block";
+}
+function addPost(){
+ const title=document.getElementById("title").value.trim();
+ const body=document.getElementById("body").value.trim();
+ const category=document.getElementById("newCategory").value;
+ if(!title||!body){document.getElementById("message").textContent="শিরোনাম ও লেখা পূরণ করো।";return}
+ posts.unshift({title,category,body,date:new Date().toLocaleDateString("bn-BD")});
+ save();showPosts();
+ document.getElementById("title").value="";
+ document.getElementById("body").value="";
+ document.getElementById("message").textContent="এই ব্রাউজারে লেখাটি সংরক্ষিত হয়েছে।";
+}
+showPosts();
+</script>
+</body>
+</html>
