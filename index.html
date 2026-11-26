@@ -34,6 +34,19 @@ button:hover{opacity:.88}
 footer{margin-top:70px;background:#263c32;color:#eee;padding:35px 8%;text-align:center;line-height:2}
 footer a{color:#e9d5ae}
 @media(max-width:600px){.hero h1{font-size:29px}header{padding:18px 5%}nav a{margin:0 5px}}
+.photo {
+  width: 196px; /* ছবির সাইজের চেয়ে সামান্য বড় */
+  height: 196px;
+  border-radius: 50%;
+  border: 2px dashed #546e7a; /* বৃত্তাকার ড্যাশ দাগ */
+  
+  /* ছবিকে বৃত্তের একদম মাঝখানে সমানভাবে বসানোর কোড */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0; /* স্ক্রিন ছোট হলেও বৃত্তটি চ্যাপ্টা হবে না */
+}
+
 .photo img {
   width: 180px;
   height: 180px;
@@ -41,14 +54,8 @@ footer a{color:#e9d5ae}
   border-radius: 50%;
   border: 3px solid #263238;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-} 
-  .hero {
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* ছবি ও লেখার মাঝে সুন্দর গ্যাপ রাখবে */
-  gap: 30px;
-  flex-direction: row-reverse; /* এটি ছবিকে ডানে নিয়ে যাবে */
 }
+
 
 </style>
 </head>
